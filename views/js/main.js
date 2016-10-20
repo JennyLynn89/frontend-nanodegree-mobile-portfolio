@@ -506,7 +506,8 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
 
 	//moved scrollTop out of for loop
-  var items = document.querySelectorAll('.mover');
+	//replaced querySelectorAll with getElementsByClassName() method
+  var items = document.getElementsByClassName('mover');
 	var scrollTop = document.body.scrollTop / 1250;
 	for (var i = 0; i < items.length; i++) {
     var phase = Math.sin((scrollTop) + (i % 5));
