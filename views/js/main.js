@@ -568,7 +568,7 @@ function updatePositions() {
 // will never be a different value at any point in time after the "mover"
 // pizzas have been placed on the page:
    
-
+window.performance.mark("mark_start_frame");
   //for loops generate placement of background pizzas and animate them onto the background
   for (var i = 0; i < 5; i++) {
     phaseArray.push(Math.sin((phaseTop / 1250) + i));
@@ -579,7 +579,7 @@ function updatePositions() {
         items[i].style.transform = 'translateX(' + 100 * phase + 'px)';
   }
 
-window.performance.mark("mark_start_frame");
+
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
