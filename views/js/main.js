@@ -553,6 +553,9 @@ function updatePositions() {
   }
 */
 
+var items = document.getElementsByClassName('mover');
+  var phaseTop = document.body.scrollTop;
+  var phaseArray = [];
 
 function updatePositions() {
   frame++;
@@ -561,18 +564,14 @@ function updatePositions() {
 // at a higher, longer-lived scope than `updatePositions`, because `items`
 // will never be a different value at any point in time after the "mover"
 // pizzas have been placed on the page:
-  var items = document.getElementsByClassName('mover');
-  var phaseTop = document.body.scrollTop;
-  var phaseArray = [];
-
-  var i;
+   
 
   //for loops generate placement of background pizzas and animate them onto the background
-  for (i = 0; i < 5; i++) {
+  for (var i = 0; i < 5; i++) {
     phaseArray.push(Math.sin((phaseTop / 1250) + i));
   }
 
-  for (i = 0; i < items.length; i++) {
+  for ( var i = 0; i < items.length; i++) {
       var phase = phaseArray[i % 5];
       items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
