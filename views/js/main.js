@@ -564,10 +564,10 @@ window.addEventListener('scroll', updatePositions);
 // Generates the sliding pizzas when the page loads.
 //decreased pizzas to 20 in for loop
 document.addEventListener('DOMContentLoaded', function() {
-  var cols = 8;
+  var cols = 4;
   var s = 256;
 	var movingPizzas1 = document.getElementById("movingPizzas1");
-  for (var i = 0; i < 20; i++) {
+  for (var i = 0; i < 16; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
