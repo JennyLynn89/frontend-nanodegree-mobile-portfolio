@@ -565,7 +565,7 @@ window.addEventListener('scroll', updatePositions);
 //decreased pizzas to 20 in for loop
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 3;
-  var s = 400;
+  var s = 450;
 	var movingPizzas1 = document.getElementById("movingPizzas1");
   for (var i = 0; i < 9; i++) {
     var elem = document.createElement('img');
