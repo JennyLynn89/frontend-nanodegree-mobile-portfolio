@@ -533,19 +533,22 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 
 // Moves the sliding background pizzas based on scroll position
 
-
+//replaced querySelectorAll with getElementsByClassName method
+//moved out of for loop
+var items = document.getElementsByClassName('mover'); 
 
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-	//moved scrollTop out of for loop
-	//replaced querySelectorAll with getElementsByClassName() method
-  var scrollTop = document.body.scrollTop / 1250;
-	var items = document.getElementsByClassName('mover');
+	//calculates outside of loop to avoid querying the DOM each time
+	//moved out of for loop
+	var scrollPosition = document.body.scrollTop / 1250;
 	
-	for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((scrollTop) + (i % 5));
+	//Referenced https://github.com/mashablair/web-perf-optimization/blob/master/views/js/main.js
+	//var len and var phase inside the loop initialization for efficiency
+	for (var i = 0; len = items.length, phase; i < len; i++) {
+    var phase = Math.sin((scrollPosition) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
@@ -563,12 +566,15 @@ function updatePositions() {
 window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
-//decreased pizzas to 20 in for loop
 document.addEventListener('DOMContentLoaded', function() {
-  var cols = 3;
-  var s = 450;
-	var movingPizzas1 = document.getElementById("movingPizzas1");
-  for (var i = 0; i < 9; i++) {
+  var cols = 8;
+  var s = 256;
+	
+	//moved out of for loop, put into var and replaced querySelector
+	var movingPizzas = document.getElementById("movingPizzas1");
+	
+	//decreased pizzas to 32 in for loop (32 and 256 are multiples of 8) 
+  for (var i = 0; i < 32; i++) { 
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
