@@ -547,7 +547,7 @@ function updatePositions() {
 	
 	//Referenced https://github.com/mashablair/web-perf-optimization/blob/master/views/js/main.js
 	//var len and var phase inside the loop initialization for efficiency
-	for (var i = 0; len = items.length, phase; i < len; i++) {
+	for (var i = 0, len = items.length, phase; i < len; i++) {
     var phase = Math.sin((scrollPosition) + (i % 5));
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
