@@ -576,8 +576,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	//Referenced Karol's suggestion on dynamically calculating background pizzas ("I still have FSL issues!" discussion)
 	var intViewportWidth = window.innerWidth;
 	
-	//decreased pizzas to 32 in for loop (32 and 256 are multiples of 8) 
-  for (var i = 0, elem; i < 32; i++) { 
+	//decreased pizzas to 24 in for loop  
+  for (var i = 0, elem; i < 24; i++) { 
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
