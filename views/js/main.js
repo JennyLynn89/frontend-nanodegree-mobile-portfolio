@@ -571,9 +571,9 @@ function updatePositions() {
     phaseArray.push(Math.sin((phaseTop / 1250) + i));
   }
 
-  for ( var i = 0; i < items.length; i++) {
+  for (var i = 0; i < items.length; i++) {
       var phase = phaseArray[i % 5];
-      items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+        items[i].style.transform = 'translateX(' + 100 * phase + 'px)';
   }
 
 window.performance.mark("mark_start_frame");
