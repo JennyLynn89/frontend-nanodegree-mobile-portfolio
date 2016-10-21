@@ -553,13 +553,15 @@ function updatePositions() {
   }
 */
 
+
+
 var items = document.getElementsByClassName('mover');
   var phaseTop = document.body.scrollTop;
   var phaseArray = [];
 
 function updatePositions() {
   frame++;
-
+https://github.com/AshleyED/WebOptimization/blob/master/source/views/js/main.js
 // You can optimize further by allowing `items` to be created and assigned
 // at a higher, longer-lived scope than `updatePositions`, because `items`
 // will never be a different value at any point in time after the "mover"
