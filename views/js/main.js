@@ -577,7 +577,7 @@ function updatePositions() {
       items[i].style.transform = 'translateX(' + 100 * phase + 'px)';
   }
 
-
+window.performance.mark("mark_start_frame");
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
