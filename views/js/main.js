@@ -528,7 +528,7 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
   console.log("Average scripting time to generate last 10 frames: " + sum / 10 + "ms");
 }
 
-/*
+
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
@@ -547,9 +547,9 @@ for (var i = 0; i < items.length; i++) {
     var phase = phaseArray[i%5];
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
-*/
 
 
+/*
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
@@ -568,7 +568,7 @@ for (var i = 0; i < items.length; i++) {
     var phase = phaseArray[i%5];
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
-
+*/
 
 
 
