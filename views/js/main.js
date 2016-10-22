@@ -398,6 +398,10 @@ var pizzaElementGenerator = function(i) {
   return pizzaContainer;
 };
 
+// resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
+var resizePizzas = function(size) {
+  window.performance.mark("mark_start_resize");   // User Timing API function
+
 // Changes the value for the size of the pizza above the slider
   function changeSliderLabel(size) {
     switch(size) {
@@ -415,7 +419,11 @@ var pizzaElementGenerator = function(i) {
     }
   }
 	
+	changeSliderLabel(size);
 	
+	
+//Referenced Cameron's code at https://www.udacity.com/course/viewer#!/c-ud860/l-4147498575/e-4154208580/m-4142388616
+//Here changePizzaSizes figures out the width it wants and then sets the width of every element to that percentage
 function changePizzaSizes(size) {
     var newWidth;
 
@@ -433,65 +441,18 @@ function changePizzaSizes(size) {
         console.log("bug in sizeSwitcher");
     }
 
+	//Put collection of DOM nodes into var RandomPizzas 
+	//Allows use of randomPizzas in for loop w/o querying the DOM each time
+	//Then replaced querySelectorAll with getElementsByClassName
     var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
 
     for (var i = 0; i < randomPizzas.length; i++) {
       randomPizzas[i].style.width = newWidth + '%';
     }
   }
-// resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
-var resizePizzas = function(size) {
-  window.performance.mark("mark_start_resize");   // User Timing API function
 
+  changePizzaSizes(size);
   
-
-  changeSliderLabel(size);
-
-   // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
- /* function determineDx (elem, size) {
-    var oldWidth = elem.offsetWidth;
-    var windowWidth = document.querySelector("#randomPizzas").offsetWidth;
-    var oldSize = oldWidth / windowWidth;
-
-    // Changes the slider value to a percent width
-    function sizeSwitcher (size) {
-      switch(size) {
-        case "1":
-          return 0.25;
-        case "2":
-          return 0.3333;
-        case "3":
-          return 0.5;
-        default:
-          console.log("bug in sizeSwitcher");
-      }
-    }
-
-    var newSize = sizeSwitcher(size);
-    var dx = (newSize - oldSize) * windowWidth;
-
-    return dx;
-  }
-*/
-  // Iterates through pizza elements on the page and changes their widths
-	//Put collection of DOM nodes into var RandomPizzas
-	//allows use of randomPizzas in for loop w/o querying the DOM each time
-	
-/*  function changePizzaSizes(size) {
-		var randomPizzas = document.querySelectorAll(".randomPizzaContainer");
-    for (var i = 0; i < randomPizzas.length; i++) {
-      var dx = determineDx(randomPizzas[i], size);
-      var newwidth = (randomPizzas[i].offsetWidth + dx) + 'px';
-      randomPizzas[i].style.width = newwidth;
-    }
-  }
-
-  changePizzaSizes(size);
-*/
-
-
-  changePizzaSizes(size);
-
 
   // User Timing API is awesome
   window.performance.mark("mark_end_resize");
@@ -528,15 +489,21 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
   console.log("Average scripting time to generate last 10 frames: " + sum / 10 + "ms");
 }
 
-
+// The following code for sliding background pizzas was pulled from Ilya's demo found at:
+// https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
+// Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-//Optimization: Moved phase calculation out of style loop, and set up a phase array to avoide calculating phase at each step.
-
-  var items = document.getElementsByClassName('mover');
+  //Replaced querySelectorAll with getElementsByClassName
+	var items = document.getElementsByClassName('mover');
   var scrollTop = document.body.scrollTop / 1250;
+	
+//Moved phase calculation out of style loop, set up phaseArray, two for loops
+//Prevents calculating phase at each step
+//These optimizations were found at:
+//https://github.com/lanwei5392/frontend-nanodegree-mobile-portfolio/blob/master/views/js/main.js
   var phaseArray = [];
   for (var i = 0; i < 5; i++) {
     var phase = Math.sin(scrollTop + i%5);
