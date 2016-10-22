@@ -548,12 +548,15 @@ function updatePositions() {
 	//calculates outside of loop to avoid querying the DOM each time
 	//moved out of for loop
 	//var scrollPosition = document.body.scrollTop / 1250;
+	var phase = [];
+	for (var i = 0; i < items.length; i++) {
+    phase.push(Math.sin((scrollPosition) + (i % 5)));
+  }
 	
 	//Referenced https://github.com/mashablair/web-perf-optimization/blob/master/views/js/main.js
 	//var len and var phase inside the loop initialization for efficiency
-	for (var i = 0, len = items.length, phase; i < len; i++) {
-    var phase = Math.sin((scrollPosition) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+	for (var i = 0; i < items.length; i++) {
+    items[i].style.left = items[i].basicLeft + 100 * phase[i] + 'px';
   }
 
 
