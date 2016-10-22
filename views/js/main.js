@@ -537,13 +537,17 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 //moved out of for loop
 var items = document.getElementsByClassName('mover'); 
 
+//calculates outside of loop to avoid querying the DOM each time
+//moved out of for loop
+var scrollPosition = document.body.scrollTop / 1250;
+
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
 	//calculates outside of loop to avoid querying the DOM each time
 	//moved out of for loop
-	var scrollPosition = document.body.scrollTop / 1250;
+	//var scrollPosition = document.body.scrollTop / 1250;
 	
 	//Referenced https://github.com/mashablair/web-perf-optimization/blob/master/views/js/main.js
 	//var len and var phase inside the loop initialization for efficiency
