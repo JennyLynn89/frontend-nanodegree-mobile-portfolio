@@ -528,7 +528,7 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
   console.log("Average scripting time to generate last 10 frames: " + sum / 10 + "ms");
 }
 
-
+/*
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
@@ -547,68 +547,31 @@ for (var i = 0; i < items.length; i++) {
     var phase = phaseArray[i%5];
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
+*/
 
-
-
-/*
-// The following code for sliding background pizzas was pulled from Ilya's demo found at:
-// https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
-
-// Moves the sliding background pizzas based on scroll position
-
-//replaced querySelectorAll with getElementsByClassName method
-//moved out of for loop
-var items = document.getElementsByClassName('mover'); 
-
-//calculates outside of loop to avoid querying the DOM each time
-//moved out of for loop
-var scrollPosition = document.body.scrollTop / 1250;
 
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-	//calculates outside of loop to avoid querying the DOM each time
-	//moved out of for loop
-	//var scrollPosition = document.body.scrollTop / 1250;
-	var phase = [];
-	for (var i = 0; i < items.length; i++) {
-    phase.push(Math.sin((scrollPosition) + (i % 5)));
-  }
-	
-	//Referenced https://github.com/mashablair/web-perf-optimization/blob/master/views/js/main.js
-	//var len and var phase inside the loop initialization for efficiency
-	for (var i = 0; i < items.length; i++) {
-    items[i].style.left = items[i].basicLeft + 100 * phase[i] + 'px';
-  }
-*/
+//Optimization: Moved phase calculation out of style loop, and set up a phase array to avoide calculating phase at each step.
 
-
-/*
-var items = document.getElementsByClassName('mover');
-  var phaseTop = document.body.scrollTop;
+  var items = document.getElementsByClassName('mover');
+  var scrollPosition = document.body.scrollTop / 1250;
   var phaseArray = [];
-
-function updatePositions() {
-  frame++;
-	
-//https://github.com/AshleyED/WebOptimization/blob/master/source/views/js/main.js
-// You can optimize further by allowing `items` to be created and assigned
-// at a higher, longer-lived scope than `updatePositions`, because `items`
-// will never be a different value at any point in time after the "mover"
-// pizzas have been placed on the page:
-   
-window.performance.mark("mark_start_frame");
-  //for loops generate placement of background pizzas and animate them onto the background
   for (var i = 0; i < 5; i++) {
-    phaseArray.push(Math.sin((phaseTop / 1250) + i));
+    var phase = Math.sin(scrollPosition + i%5);
+    phase = phaseArray.push(phase)
+  };
+
+for (var i = 0; i < items.length; i++) {
+    var phase = phaseArray[i%5];
+    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
 
-  for (var i = 0; i < items.length; i++) {
-      var phase = phaseArray[i % 5];
-        items[i].style.transform = 'translateX(' + 100 * phase + 'px)';
-  }
-*/
+
+
+
 
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -635,8 +598,8 @@ document.addEventListener('DOMContentLoaded', function() {
 	//Referenced Karol's suggestion on dynamically calculating background pizzas ("I still have FSL issues!" discussion)
 	var intViewportWidth = window.innerWidth;
 	
-	//decreased pizzas to 24 in for loop  
-  for (var i = 0, elem; i < 24; i++) { 
+	//decreased pizzas to 32 in for loop  
+  for (var i = 0, elem; i < 32; i++) { 
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
