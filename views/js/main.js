@@ -528,6 +528,29 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
   console.log("Average scripting time to generate last 10 frames: " + sum / 10 + "ms");
 }
 
+
+function updatePositions() {
+  frame++;
+  window.performance.mark("mark_start_frame");
+
+//Optimization: Moved phase calculation out of style loop, and set up a phase array to avoide calculating phase at each step.
+
+  var items = document.getElementsByClassName('mover');
+  var scrollTop = document.body.scrollTop / 1250;
+  var phaseArray = [];
+  for (var i = 0; i < 5; i++) {
+    var phase = Math.sin(scrollTop + i%5);
+    phase = phaseArray.push(phase)
+  };
+
+for (var i = 0; i < items.length; i++) {
+    var phase = phaseArray[i%5];
+    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  }
+
+
+
+/*
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
@@ -558,7 +581,7 @@ function updatePositions() {
 	for (var i = 0; i < items.length; i++) {
     items[i].style.left = items[i].basicLeft + 100 * phase[i] + 'px';
   }
-
+*/
 
 
 /*
