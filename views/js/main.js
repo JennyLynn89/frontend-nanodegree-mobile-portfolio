@@ -397,11 +397,6 @@ var pizzaElementGenerator = function(i) {
 
   return pizzaContainer;
 };
-
-// resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
-var resizePizzas = function(size) {
-  window.performance.mark("mark_start_resize");   // User Timing API function
-
 // Changes the value for the size of the pizza above the slider
   function changeSliderLabel(size) {
     switch(size) {
@@ -419,10 +414,7 @@ var resizePizzas = function(size) {
     }
   }
 	
-	changeSliderLabel(size);
-	
-	
-//Referenced Cameron's code at https://www.udacity.com/course/viewer#!/c-ud860/l-4147498575/e-4154208580/m-4142388616
+	//Referenced Cameron's code at https://www.udacity.com/course/viewer#!/c-ud860/l-4147498575/e-4154208580/m-4142388616
 //Here changePizzaSizes figures out the width it wants and then sets the width of every element to that percentage
 function changePizzaSizes(size) {
     var newWidth;
@@ -450,10 +442,14 @@ function changePizzaSizes(size) {
       randomPizzas[i].style.width = newWidth + '%';
     }
   }
+// resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
+var resizePizzas = function(size) {
+  window.performance.mark("mark_start_resize");   // User Timing API function
+
+	changeSliderLabel(size);
 
   changePizzaSizes(size);
-  
-
+ 
   // User Timing API is awesome
   window.performance.mark("mark_end_resize");
   window.performance.measure("measure_pizza_resize", "mark_start_resize", "mark_end_resize");
