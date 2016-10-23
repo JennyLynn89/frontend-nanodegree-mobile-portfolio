@@ -502,7 +502,7 @@ function updatePositions() {
 //https://github.com/lanwei5392/frontend-nanodegree-mobile-portfolio/blob/master/views/js/main.js
   var phaseArray = [];
   for (var i = 0; i < 5; i++) {
-    phaseArray.push(Math.sin(scrollTop + i%5))
+    phaseArray.push(Math.sin(scrollTop + i))
   };
 
 for (var i = 0; i < items.length; i++) {
