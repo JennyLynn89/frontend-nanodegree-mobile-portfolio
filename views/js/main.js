@@ -465,7 +465,7 @@ window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
 var pizzasDiv = document.getElementById("randomPizzas");
-for (var i = 2; i < 100; i++) {
+for (var i = 2; i < 24; i++) {
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
@@ -506,40 +506,13 @@ function updatePositions() {
 //https://github.com/lanwei5392/frontend-nanodegree-mobile-portfolio/blob/master/views/js/main.js
   var phaseArray = [];
   for (var i = 0; i < 5; i++) {
-    var phase = Math.sin(scrollTop + i%5);
-    phase = phaseArray.push(phase)
+    phaseArray.push(Math.sin(scrollTop + i%5))
   };
 
 for (var i = 0; i < items.length; i++) {
     var phase = phaseArray[i%5];
     items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
   }
-
-
-/*
-function updatePositions() {
-  frame++;
-  window.performance.mark("mark_start_frame");
-
-//Optimization: Moved phase calculation out of style loop, and set up a phase array to avoide calculating phase at each step.
-
-  var items = document.getElementsByClassName('mover');
-  var scrollPosition = document.body.scrollTop / 1250;
-  var phaseArray = [];
-  for (var i = 0; i < 5; i++) {
-    var phase = Math.sin(scrollPosition + i%5);
-    phase = phaseArray.push(phase)
-  };
-
-for (var i = 0; i < items.length; i++) {
-    var phase = phaseArray[i%5];
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-  }
-*/
-
-
-
-
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
@@ -566,7 +539,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	var intViewportWidth = window.innerWidth;
 	
 	//decreased pizzas to 24 in for loop  
-  for (var i = 0, elem; i < 24; i++) { 
+  for (var i = 0; i < 24; i++) { 
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
