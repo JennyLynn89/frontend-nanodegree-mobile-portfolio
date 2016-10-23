@@ -532,7 +532,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	//moved out of for loop, put into var and replaced querySelector
 	var movingPizzas = document.getElementById("movingPizzas1");
 	
-	//Referenced Karol's suggestion on dynamically calculating background pizzas ("I still have FSL issues!" discussion)
+	//Referenced Karol's suggestion on dynamically calculating background pizzas (Udacity discussion: "I still have FSL issues!")
 	var intViewportWidth = window.innerWidth;
 	
 	//decreased pizzas to 24 in for loop  
