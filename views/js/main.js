@@ -414,7 +414,7 @@ var pizzaElementGenerator = function(i) {
     }
   }
 	
-	//Referenced Cameron's code at https://www.udacity.com/course/viewer#!/c-ud860/l-4147498575/e-4154208580/m-4142388616
+//Referenced Cameron's code at https://www.udacity.com/course/viewer#!/c-ud860/l-4147498575/e-4154208580/m-4142388616
 //Here changePizzaSizes figures out the width it wants and then sets the width of every element to that percentage
 function changePizzaSizes(size) {
     var newWidth;
@@ -486,7 +486,6 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 }
 
 
-/*
 // The following code for sliding background pizzas was pulled from Ilya's demo found at:
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 // Moves the sliding background pizzas based on scroll position
@@ -502,44 +501,16 @@ function updatePositions() {
 //Prevents calculating phase at each step
 //These optimizations were found at:
 //https://github.com/lanwei5392/frontend-nanodegree-mobile-portfolio/blob/master/views/js/main.js
-  var phaseArray = [];
-  for (var i = 0; i < 5; i++) {
-    phaseArray.push(Math.sin(scrollTop + i))
-  };
-
-for (var i = 0; i < items.length; i++) {
-    var phase = phaseArray[i%5];
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
-  }
-*/
-
-function updatePositions() { 
-   frame++; 
-   window.performance.mark("mark_start_frame"); 
- 
- 
- //Optimization: Moved phase calculation out of style loop, and set up a phase array to avoide calculating phase at each step. 
-
- 
-   var items = document.getElementsByClassName('mover'); 
-   var scrollTop = document.body.scrollTop / 1250; 
-   var phaseArray = []; 
+  var phaseArray = []; 
    for (var i = 0; i < 5; i++) { 
      var phase = Math.sin(scrollTop + i%5); 
-     phase = phaseArray.push(phase) 
-   }; 
- 
- 
-  for (var i = 0; i < items.length; i++) { 
-     var phase = phaseArray[i%5]; 
-     items[i].style.left = items[i].basicLeft + 100 * phase + 'px'; 
+     phase = phaseArray.push(phase); 
+   }
+  
+  for (var j = 0; j < items.length; j++) { 
+     items[j].style.left = items[j].basicLeft + 100 *  phaseArray[j%5] + 'px'; 
    } 
- 
- 
-
-	
-	
-	
+ 	
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
   window.performance.mark("mark_end_frame");
@@ -560,10 +531,7 @@ document.addEventListener('DOMContentLoaded', function() {
 	
 	//moved out of for loop, put into var and replaced querySelector
 	var movingPizzas = document.getElementById("movingPizzas1");
-	
-	//Referenced Karol's suggestion on dynamically calculating background pizzas ("I still have FSL issues!" discussion)
-	var intViewportWidth = window.innerWidth;
-	
+		
 	//decreased pizzas to 24 in for loop  
   for (var i = 0; i < 24; i++) { 
     var elem = document.createElement('img');
